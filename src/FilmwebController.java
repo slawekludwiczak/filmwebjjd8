@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class FilmwebController {
@@ -9,6 +10,7 @@ public class FilmwebController {
 
     private MovieDatabase database = new MovieDatabase();
     private UIService uiService = new UIService();
+    private FileService fileService = new FileService();
 
     void mainLoop() {
         int option;
@@ -42,6 +44,7 @@ public class FilmwebController {
             case SEARCH_MOVIE:
                 break;
             case EXIT:
+                exit();
                 break;
             default:
                 System.out.println("Nieznana opcja");
@@ -62,4 +65,12 @@ public class FilmwebController {
         database.removeById(movieId);
     }
 
+    void exit() {
+        try {
+            fileService.save(database);
+            System.out.println("Dane zapisano do pliku");
+        } catch (IOException e) {
+            System.out.println("Nie udało się zapisać danych");
+        }
+    }
 }

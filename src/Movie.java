@@ -58,6 +58,10 @@ public class Movie {
         this.director = director;
     }
 
+    public String toCsv() {
+        return String.format("%d;%s;%d;%s;%s", id, title, year, genre, director);
+    }
+
     @Override
     public String toString() {
         return String.format("%s %d %s %s", title, year, genre, director);

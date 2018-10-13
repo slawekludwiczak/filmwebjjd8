@@ -5,6 +5,10 @@ public class MovieDatabase {
 
     private List<Movie> movies = new ArrayList<>();
 
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
     void add(Movie movie) throws DuplicateMovieException {
         Movie foundMovie = findById(movie.getId());
         if(foundMovie != null)
