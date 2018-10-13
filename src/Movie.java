@@ -46,7 +46,8 @@ public class Movie {
         this.director = director;
     }
 
-    void show() {
-        System.out.printf("%s %d %s %s", title, year, genre, director);
+    @Override
+    public String toString() {
+        return String.format("%s %d %s %s", title, year, genre, director);
     }
 }
