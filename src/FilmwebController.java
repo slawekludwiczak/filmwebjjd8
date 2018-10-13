@@ -50,7 +50,11 @@ public class FilmwebController {
 
     private void addMovie() {
         Movie movie = uiService.readMovie();
-        database.add(movie);
+        try {
+            database.add(movie);
+        } catch (DuplicateMovieException e) {
+            System.out.println("Film o takim ID znajduje się już w bazie");
+        }
     }
 
     private void removeMovie() {
