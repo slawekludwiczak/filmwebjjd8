@@ -7,6 +7,9 @@ public class FilmwebController {
     private static final int SEARCH_MOVIE = 3;
     private static final int EXIT = 4;
 
+    private MovieDatabase database = new MovieDatabase();
+    private UIService uiService = new UIService();
+
     void mainLoop() {
         int option;
         do {
@@ -24,28 +27,35 @@ public class FilmwebController {
     }
 
     int readOption() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Numer opcji:");
-        int optionNumber = scanner.nextInt();
+        int optionNumber = uiService.readOption();
         return optionNumber;
     }
 
     void executeOption(int opt) {
         switch (opt) {
             case ADD_MOVIE:
-
+                addMovie();
                 break;
             case REMOVE_MOVIE:
-
+                removeMovie();
                 break;
             case SEARCH_MOVIE:
-
                 break;
             case EXIT:
                 break;
             default:
                 System.out.println("Nieznana opcja");
         }
+    }
+
+    private void addMovie() {
+        Movie movie = uiService.readMovie();
+        database.add(movie);
+    }
+
+    private void removeMovie() {
+        int movieId = uiService.readMovieId();
+        database.removeById(movieId);
     }
 
 }

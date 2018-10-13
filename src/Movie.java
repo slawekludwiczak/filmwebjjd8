@@ -1,5 +1,8 @@
+import java.util.Objects;
+
 public class Movie {
 
+    private int id;
     private String title;
     private int year;
     private String genre;
@@ -7,11 +10,20 @@ public class Movie {
 
     Movie() {}
 
-    Movie(String title, int year, String genre, String director) {
+    Movie(int id, String title, int year, String genre, String director) {
+        this.id = id;
         this.title = title;
         this.year = year;
         this.genre = genre;
         this.director = director;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -49,5 +61,22 @@ public class Movie {
     @Override
     public String toString() {
         return String.format("%s %d %s %s", title, year, genre, director);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return id == movie.id &&
+                year == movie.year &&
+                Objects.equals(title, movie.title) &&
+                Objects.equals(genre, movie.genre) &&
+                Objects.equals(director, movie.director);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, year, genre, director);
     }
 }
